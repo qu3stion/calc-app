@@ -3,24 +3,21 @@ import { useState } from 'react'
 function Calculator() {
   const [firstNum, currFirstNum] = useState(0);
   const [secondNum, currSecondNum] = useState(0);
-  const [operation, currOperation] = useState(0);
 
-  function Change(e) {
-    currOperation(e.target.value);
-  }
 
-  const [sum, currSum] = useState("");
+  const [sum, currSum] = useState(0);
 
   function algoRythym() {
-    if (operation === "add") {
-      return currSum(firstNum + secondNum)
-    } else if (operation === "subtract") {
-      return currSum(firstNum - secondNum);
-    } else if (operation === "multiply") {
-      return currSum(firstNum * secondNum);
-    } else if (operation === "divide") {
-      return currSum(firstNum / secondNum);
-    }
+
+    return currSum(firstNum + secondNum)
+  };
+
+  function inputOneChange(e) {
+    currFirstNum(parseInt(e.target.value))
+  }
+
+  function inputTwoChange(e) {
+    currSecondNum(parseInt(e.target.value))
   }
 
   return (
@@ -29,21 +26,15 @@ function Calculator() {
 
     <form className="add">
       <input type="number" name="value1"
-        onChange={(e) => currFirstNum(e.target.value)} value={firstNum}
+        onChange={inputOneChange}
       />
 
       <span>+</span>
 
-      <select name="operationIcons" onChange={Change} value={operation}>
-        <option value="add">+</option>
-        <option value="subtract">-</option>
-        <option value="multiply">*</option>
-        <option value="divide">/</option>
-      </select>
+
 
       <input type="text" name="value2"
-        onChange={(e) => currSecondNum(e.target.value)} value={secondNum}
-      />
+        onChange={inputTwoChange}/>
 
       <span>=</span>
 
@@ -57,5 +48,7 @@ function Calculator() {
   </div>
   )
 };
+
+
 
 export default Calculator;
